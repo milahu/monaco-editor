@@ -970,3 +970,12 @@ gulp.task(
 		createSimpleServer(SERVER_ROOT, 8088);
 	})
 );
+
+gulp.task('compile', async () => {
+	metadata.METADATA.PLUGINS.forEach(p => {
+		console.log(`Compiling ${p.name}`)
+		cp.execSync('npm run-script compile --if-present', {
+			cwd: path.join(__dirname, p.rootPath)
+		});
+	})
+});
